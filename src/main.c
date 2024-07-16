@@ -1177,7 +1177,7 @@ int main(int argc, char *argv[]) {
             struct Autostart *exec = TAILQ_FIRST(&autostarts);
 
             LOG("auto-starting %s\n", exec->command);
-            start_application(exec->command, exec->no_startup_id);
+            start_application(exec->command, exec->no_startup_id, 0);
 
             FREE(exec->command);
             TAILQ_REMOVE(&autostarts, exec, autostarts);
@@ -1190,7 +1190,7 @@ int main(int argc, char *argv[]) {
         struct Autostart *exec_always = TAILQ_FIRST(&autostarts_always);
 
         LOG("auto-starting (always!) %s\n", exec_always->command);
-        start_application(exec_always->command, exec_always->no_startup_id);
+        start_application(exec_always->command, exec_always->no_startup_id, 0);
 
         FREE(exec_always->command);
         TAILQ_REMOVE(&autostarts_always, exec_always, autostarts_always);
@@ -1206,7 +1206,7 @@ int main(int argc, char *argv[]) {
                   barconfig->verbose ? "-V" : "",
                   barconfig->id, current_socketpath);
         LOG("Starting bar process: %s\n", command);
-        start_application(command, true);
+        start_application(command, true, 0);
         free(command);
     }
 
